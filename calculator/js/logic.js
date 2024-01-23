@@ -8,25 +8,25 @@ class Calculation {
 
 	deleteLastSymbol() {
 		this.calculationLine = this.calculationLine.slice(0, -1);
-		print(this.calculationLine || this.result.toString());
+		print(this.calculationLine || this.result);
 	}
 
 	addSymbol(char) {
 		if (this.calculationLine === '') {
 			if (this.result !== 0 && /[+\-x/]/.test(char)) {
-				this.calculationLine = this.result.toString();
+				this.calculationLine = this.result;
 			} else if (/[+\-x/]/.test(char)) {
 				this.calculationLine = '';
 			}
 		}
 		this.calculationLine += `${char}`;
-		print(this.calculationLine || this.result.toString());
+		print(this.calculationLine || this.result);
 	}
 
 	calculate() {
 		this.result = eval(this.calculationLine.replace('x', '*'));
 		this.calculationLine = '';
-		print(this.result.toString());
+		print(this.result);
 	}
 }
 
@@ -38,7 +38,7 @@ const main = () => {
 				case "С":
 					calculator.calculationLine = '';
 					calculator.result = 0;
-					print(calculator.result.toString());
+					print(calculator.result);
 					break;
 				case "АС":
 					calculator.deleteLastSymbol();
