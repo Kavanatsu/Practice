@@ -1,0 +1,126 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	color: #01131c;
+}
+
+.wrap {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+h1 {
+	margin: 30px;
+}
+
+#buttons {
+	display: flex;
+	justify-content: center;
+	width: 50%;
+}
+
+#button, .btn-wrap>input {
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	background-color: #85d8ff;
+	border: none;
+	border-radius: 25px;
+	padding: 10px 30px;
+	margin: 0 20px;
+	font-size: 20px;
+	transition: .5s;
+	position: relative;
+	top: 0; 
+	left: 0;
+	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1); 
+	cursor: pointer;
+}
+
+#button:hover, .btn-wrap>input:hover {
+	background-color: #59caff;
+	transition: .5s;
+}
+
+#button:active, .btn-wrap>input:active {
+	top: 3px; 
+	left: 3px;
+	box-shadow: none;
+	background-color: #59caff;
+	transition: .5s;
+}
+
+#container {
+	margin: 20px 0;
+	width: 1024px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+h2 {
+ margin: 10px 0;	
+}
+
+p {
+	font-size: 18px;
+}
+
+.question {
+	margin: 10px 0;
+	display: flex;
+	flex-direction: column;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+label>input, label>select {
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	background-color: white;
+	padding: 10px 20px;
+	border: 1px solid #59caff;
+	border-radius: 25px;
+	margin: 15px 0;
+	font-size: 18px;
+	transition: .5s;
+}
+
+label>input:hover, label>select:hover {
+	background-color: #85d8ff;
+	transition: .5s;
+}
+
+label>input:focus, label>select:focus {
+	background-color: #59caff;
+	border: none;
+	transition: .5s;
+}
+
+label>input:active, label>select:active {
+	background-color: #59caff;
+	transition: .5s;
+}
+
+.variant {
+	font-weight: 500;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+	align-items: center;
+	margin: 5px 0;
+}
+
+.variant>input {
+	margin: 5px 7px;
+}
+
+.btn-wrap {
+	display: flex;
+	justify-content: flex-end;
+}
+

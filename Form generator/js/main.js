@@ -6,37 +6,65 @@ async function loadForm(url) {
 
 function generateForm(form) {
   const container = document.getElementById('container');
+	
+	const delData = document.querySelector('form');
+	if(delData){
+		container.removeChild(delData);
+	}
+
+	const formContainer = document.createElement('form');
+	container.appendChild(formContainer);
+
   const title = document.createElement('h2');
   title.textContent = form.title;
-  container.appendChild(title);
+  formContainer.appendChild(title);
+
   if (form.description) {
     const description = document.createElement('p');
     description.textContent = form.description;
-    container.appendChild(description);
+    formContainer.appendChild(description);
   }
+
   form.fields.forEach(field => {
     const label = document.createElement('label');
     label.textContent = field.label;
-    if (field.attrs.type === 'text') {
-      const input = document.createElement('input');
-      input.setAttribute('type', 'text');
-      input.setAttribute('name', field.attrs.name);
-      label.appendChild(input);
-    } else if (field.attrs.type === 'radio') {
-      field.attrs.variants.forEach(variant => {
-        const input = document.createElement('input');
-        input.setAttribute('type', 'radio');
-        input.setAttribute('name', field.attrs.name);
-        input.setAttribute('value', variant.value);
-        label.appendChild(input);
-
-        const variantLabel = document.createElement('span');
-        variantLabel.textContent = variant.label;
-        label.appendChild(variantLabel);
-      });
-    }
-    container.appendChild(label);
+		label.setAttribute('class', 'question');
+		if(field.attrs.type === 'select') {
+			const select = document.createElement('select');
+			select.setAttribute('name', field.attrs.name);
+			field.attrs.variants.forEach(variant => {
+				const option = document.createElement('option');
+				option.setAttribute('value', variant.value);
+				option.textContent = variant.label;
+				select.appendChild(option);
+			})
+			label.appendChild(select);
+		} else {
+			if (field.attrs.type === 'radio' || field.attrs.type === 'checkbox') {
+				field.attrs.variants.forEach(variant => {
+					const variantLabel = document.createElement('label');
+					variantLabel.textContent = variant.label;
+					variantLabel.setAttribute('class', 'variant');
+					label.appendChild(variantLabel);
+					const variantInput = document.createElement('input');
+					variantInput.setAttribute('type', field.attrs.type);
+					variantInput.setAttribute('name', field.attrs.name);
+					variantInput.setAttribute('value', variant.value);
+					variantLabel.appendChild(variantInput);		
+				})
+			}	else {
+				const input = document.createElement('input');
+			input.setAttribute('type', field.attrs.type);
+			input.setAttribute('name', field.attrs.name);
+			label.appendChild(input);
+			}			
+		}
+    formContainer.appendChild(label);
   });
+
+	const btnWrap = document.createElement('div');
+	btnWrap.setAttribute('class', 'btn-wrap');
+	formContainer.appendChild(btnWrap);
   form.buttons.forEach(button => {
     const btn = document.createElement('input');
     btn.textContent = button;
@@ -45,13 +73,12 @@ function generateForm(form) {
 		} else {
 			btn.setAttribute('type', button);
 		}
-    container.appendChild(btn);
+    btnWrap.appendChild(btn);
   });
 }
 
 async function onButtonClick() {
   const form = await loadForm('./data/form-test-'+ this.value +'.json');
-	console.log(form);
   generateForm(form);
 }
 
